@@ -124,7 +124,10 @@
         /* Review Auto-Scroll */
         .review-track {
             display: flex;
+            flex-wrap: nowrap;
             animation: scrollReviews 30s linear infinite;
+            /* 10 cards x 350px + 10 gaps x 24px = 3740px */
+            min-width: max-content;
         }
 
         .review-track:hover {
@@ -144,11 +147,12 @@
         /* Faster scroll on mobile */
         @media (max-width: 768px) {
             .review-track {
-                animation: scrollReviews 15s linear infinite;
+                animation: scrollReviews 20s linear infinite;
+                /* 10 cards x 300px + 10 gaps x 24px = 3240px */
             }
 
             .testimonial-track {
-                animation: scrollTestimonials 12s linear infinite;
+                animation: scrollTestimonials 15s linear infinite;
             }
         }
 
@@ -622,8 +626,8 @@
                 </div>
 
                 <!-- Auto-Scroll Review Container -->
-                <div class="overflow-hidden">
-                    <div class="review-track flex gap-6">
+                <div class="overflow-hidden w-full">
+                    <div class="review-track flex gap-6" style="width: max-content;">
                         <!-- Original Reviews -->
                         <div class="flex-shrink-0 w-[300px] md:w-[350px] overflow-hidden rounded-2xl shadow-2xl">
                             <img src="img/reviewcustomer1.png" alt="Customer Review 1"
