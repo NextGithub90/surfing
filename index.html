@@ -141,6 +141,17 @@
             }
         }
 
+        /* Faster scroll on mobile */
+        @media (max-width: 768px) {
+            .review-track {
+                animation: scrollReviews 15s linear infinite;
+            }
+
+            .testimonial-track {
+                animation: scrollTestimonials 12s linear infinite;
+            }
+        }
+
         /* Package Card Hover Effect */
         .package-card {
             transition: all 0.4s ease;
@@ -259,8 +270,10 @@
                     onclick="closeMobileMenu()">Gallery</a>
                 <a class="text-white text-lg font-medium hover:text-secondary transition-colors" href="#contact"
                     onclick="closeMobileMenu()">Contact</a>
-                <button class="mt-4 w-full py-3 rounded-full bg-secondary text-[#004d6b] font-bold">Book A
-                    Lesson</button>
+                <a href="https://wa.me/6282166716699?text=Halo%20Dame%20JC%20Surf%20School%2C%20saya%20ingin%20booking%20lesson"
+                    target="_blank" rel="noopener noreferrer"
+                    class="mt-4 w-full py-3 rounded-full bg-secondary text-[#004d6b] font-bold text-center block">Book A
+                    Lesson</a>
             </div>
         </div>
 
@@ -294,10 +307,11 @@
                                 <a class="text-white text-sm font-medium hover:text-secondary transition-colors"
                                     href="#contact">Contact</a>
                             </div>
-                            <button
+                            <a href="https://wa.me/6282166716699?text=Halo%20Dame%20JC%20Surf%20School%2C%20saya%20ingin%20booking%20lesson"
+                                target="_blank" rel="noopener noreferrer"
                                 class="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-secondary text-primary-900 text-sm font-bold shadow-lg hover:bg-white hover:scale-105 transition-all duration-300">
                                 <span class="truncate text-[#004d6b]">Book A Lesson</span>
-                            </button>
+                            </a>
                         </div>
                         <!-- Mobile Menu Button -->
                         <div class="md:hidden text-white cursor-pointer" id="hamburgerBtn" onclick="openMobileMenu()">
@@ -329,11 +343,12 @@
                     unforgettable surfing experience on the island of Gods.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button
+                    <a href="https://wa.me/6282166716699?text=Halo%20Dame%20JC%20Surf%20School%2C%20saya%20ingin%20booking%20lesson"
+                        target="_blank" rel="noopener noreferrer"
                         class="h-14 px-8 rounded-full bg-secondary text-[#004d6b] text-base font-bold shadow-[0_0_20px_rgba(64,224,208,0.5)] hover:bg-white hover:scale-105 transition-all duration-300 flex items-center gap-2">
                         <span>Book A Lesson</span>
                         <span class="material-symbols-outlined text-xl">arrow_forward</span>
-                    </button>
+                    </a>
 
                 </div>
             </div>
@@ -470,9 +485,10 @@
                                     Small Group (Max 4)
                                 </li>
                             </ul>
-                            <button
-                                class="card-btn w-full py-3 rounded-full border-2 border-primary text-primary font-bold transition-colors">Book
-                                Now</button>
+                            <a href="https://wa.me/6282166716699?text=Halo%20Dame%20JC%20Surf%20School%2C%20saya%20ingin%20booking%20paket%20Beginner%20(Group)"
+                                target="_blank" rel="noopener noreferrer"
+                                class="card-btn w-full py-3 rounded-full border-2 border-primary text-primary font-bold transition-colors text-center block">Book
+                                Now</a>
                         </div>
                     </div>
                     <!-- Intermediate Card -->
@@ -526,9 +542,10 @@
                                     Advanced Theory
                                 </li>
                             </ul>
-                            <button
-                                class="card-btn w-full py-3 rounded-full bg-primary text-white font-bold transition-colors shadow-lg shadow-primary/30">Book
-                                Now</button>
+                            <a href="https://wa.me/6282166716699?text=Halo%20Dame%20JC%20Surf%20School%2C%20saya%20ingin%20booking%20paket%20Intermediate%20Skills"
+                                target="_blank" rel="noopener noreferrer"
+                                class="card-btn w-full py-3 rounded-full bg-primary text-white font-bold transition-colors shadow-lg shadow-primary/30 text-center block">Book
+                                Now</a>
                         </div>
                     </div>
                     <!-- Private Card -->
@@ -579,9 +596,10 @@
                                     Hotel Transfer
                                 </li>
                             </ul>
-                            <button
-                                class="card-btn w-full py-3 rounded-full border-2 border-primary text-primary font-bold transition-colors">Book
-                                Now</button>
+                            <a href="https://wa.me/6282166716699?text=Halo%20Dame%20JC%20Surf%20School%2C%20saya%20ingin%20booking%20paket%20Private%201-on-1"
+                                target="_blank" rel="noopener noreferrer"
+                                class="card-btn w-full py-3 rounded-full border-2 border-primary text-primary font-bold transition-colors text-center block">Book
+                                Now</a>
                         </div>
                     </div>
                 </div>
