@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en" st>
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bali Surf School - Ride the Waves</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Permanent+Marker&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#006a94",
+                        "secondary": "#40E0D0",
+                        "accent": "#f4e4bc",
+                        "background-light": "#f8fcfd",
+                        "background-dark": "#0f1d23",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "marker": ["Permanent Marker", "cursive"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Base Reset for Full Width */
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .marker-font {
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        /* Sticky Navbar */
+        .navbar-sticky {
+            position: fixed !important;
+            background: rgba(11, 22, 27, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: rgba(11, 22, 27, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            transition: right 0.3s ease;
+            padding: 80px 30px 30px;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Testimonial Slider */
+        .testimonial-track {
+            display: flex;
+            animation: scrollTestimonials 25s linear infinite;
+        }
+
+        .testimonial-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollTestimonials {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Package Card Hover Effect */
+        .package-card {
+            transition: all 0.4s ease;
+        }
+
+        .package-card:hover {
+            background: linear-gradient(135deg, #006a94 0%, #004d6b 100%) !important;
+            border-color: #40E0D0 !important;
+            transform: translateY(-8px);
+        }
+
+        .package-card:hover .card-title,
+        .package-card:hover .card-description,
+        .package-card:hover .card-price,
+        .package-card:hover .card-price-unit,
+        .package-card:hover .card-feature {
+            color: white !important;
+        }
+
+        .package-card:hover .card-icon {
+            color: #40E0D0 !important;
+        }
+
+        .package-card:hover .card-btn {
+            background: #40E0D0 !important;
+            border-color: #40E0D0 !important;
+            color: #004d6b !important;
+        }
+
+        .package-card:hover .card-badge {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
+        }
+
+        /* WhatsApp Button */
+        .wa-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 90;
+            animation: pulse 2s infinite;
+        }
+
+        .wa-button a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .wa-button a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .wa-button .tooltip {
+            position: absolute;
+            right: 70px;
+            background: white;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+        }
+
+        .wa-button:hover .tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root">
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="absolute top-6 right-6 text-white" onclick="closeMobileMenu()">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+            <div class="flex flex-col gap-6">
+                <a class="text-white text-lg font-medium hover:text-secondary transition-colors" href="#"
+                    onclick="closeMobileMenu()">Home</a>
+                <a class="text-white text-lg font-medium hover:text-secondary transition-colors" href="#about"
+                    onclick="closeMobileMenu()">About</a>
+                <a class="text-white text-lg font-medium hover:text-secondary transition-colors" href="#packages"
+                    onclick="closeMobileMenu()">Packages</a>
+                <a class="text-white text-lg font-medium hover:text-secondary transition-colors" href="#testimonials"
+                    onclick="closeMobileMenu()">Testimonials</a>
+                <a class="text-white text-lg font-medium hover:text-secondary transition-colors" href="#gallery"
+                    onclick="closeMobileMenu()">Gallery</a>
+                <a class="text-white text-lg font-medium hover:text-secondary transition-colors" href="#contact"
+                    onclick="closeMobileMenu()">Contact</a>
+                <button class="mt-4 w-full py-3 rounded-full bg-secondary text-[#004d6b] font-bold">Book A
+                    Lesson</button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav id="navbar"
+            class="absolute top-0 w-full z-50 border-b border-white/10 bg-gradient-to-b from-black/50 to-transparent transition-all duration-300">
+            <div class="layout-container flex h-full grow flex-col">
+                <div class="px-4 md:px-10 flex flex-1 justify-center py-4">
+                    <div class="layout-content-container flex w-full max-w-[1280px] items-center justify-between">
+                        <!-- Logo -->
+                        <div class="flex items-center gap-3 text-white">
+                            <div
+                                class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm text-white">
+                                <span class="material-symbols-outlined text-2xl">surfing</span>
+                            </div>
+                            <h2 class="text-white text-xl font-bold tracking-tight">Bali Surf School</h2>
+                        </div>
+                        <!-- Desktop Menu -->
+                        <div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+                            <div class="flex items-center gap-8">
+                                <a class="text-white text-sm font-medium hover:text-secondary transition-colors"
+                                    href="#">Home</a>
+                                <a class="text-white text-sm font-medium hover:text-secondary transition-colors"
+                                    href="#about">About</a>
+                                <a class="text-white text-sm font-medium hover:text-secondary transition-colors"
+                                    href="#packages">Packages</a>
+                                <a class="text-white text-sm font-medium hover:text-secondary transition-colors"
+                                    href="#testimonials">Testimonials</a>
+                                <a class="text-white text-sm font-medium hover:text-secondary transition-colors"
+                                    href="#gallery">Gallery</a>
+                                <a class="text-white text-sm font-medium hover:text-secondary transition-colors"
+                                    href="#contact">Contact</a>
+                            </div>
+                            <button
+                                class="flex cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-secondary text-primary-900 text-sm font-bold shadow-lg hover:bg-white hover:scale-105 transition-all duration-300">
+                                <span class="truncate text-[#004d6b]">Book A Lesson</span>
+                            </button>
+                        </div>
+                        <!-- Mobile Menu Button -->
+                        <div class="md:hidden text-white cursor-pointer" id="hamburgerBtn" onclick="openMobileMenu()">
+                            <span class="material-symbols-outlined text-3xl">menu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Hero Section -->
+        <div class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+                data-alt="Surfer riding a large blue wave in Bali"
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuDHvi58rWPl3Yk1hEQYA32HML8BYljxRmgPw-lrw1lP3e2SSFo2B3snJ_iF-0ZFwr2zPacxsB87h_k4coJEI-oqhwMj7bXZ7Ld-mo1E03n9XmEWWNTp9MrfYaea0q7ZBgl2BwiqU1wEAsTNnrgysmHwe7WRxGuJQjWlXxOpaN-u8mCwe_G2BNUcMl8w4RWmvgskVXSanKEk03TV3bDs-FM6P4InHxtGDV6kK1L_etOoV1maDn_ZVxYYiBdktW1K8dB92zIvFG3l8yA');">
+            </div>
+            <div class="relative z-10 container mx-auto px-4 text-center mt-20">
+                <span
+                    class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold tracking-wider uppercase mb-6">
+                    Est. 2010 • Seminyak, Bali
+                </span>
+                <h1
+                    class="marker-font text-white text-5xl md:text-7xl lg:text-8xl leading-tight mb-6 drop-shadow-lg transform -rotate-2">
+                    Ride the Waves <br /> in Bali
+                </h1>
+                <p
+                    class="text-white/90 text-lg md:text-xl font-medium max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-md">
+                    Professional coaching for every level in paradise. Join our certified instructors for an
+                    unforgettable surfing experience on the island of Gods.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button
+                        class="h-14 px-8 rounded-full bg-secondary text-[#004d6b] text-base font-bold shadow-[0_0_20px_rgba(64,224,208,0.5)] hover:bg-white hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                        <span>Book A Lesson</span>
+                        <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                    </button>
+
+                </div>
+            </div>
+            <!-- Wave decoration at bottom -->
+            <div class="absolute bottom-0 w-full overflow-hidden leading-none">
+                <svg class="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[100px]" data-name="Layer 1"
+                    preserveaspectratio="none" viewbox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+                    <path class="fill-background-light dark:fill-background-dark"
+                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+        <!-- About Us Section -->
+        <section class="py-20 px-4 md:px-10 bg-background-light dark:bg-background-dark" id="about">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1 relative">
+                        <!-- Decorative blob -->
+                        <div class="absolute -top-10 -left-10 w-32 h-32 bg-secondary/20 rounded-full blur-2xl"></div>
+                        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-2xl"></div>
+                        <div
+                            class="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                            <img alt="Instructor teaching student on sandy beach"
+                                class="w-full h-auto object-cover aspect-[4/3]"
+                                data-alt="Surf instructor pointing at the ocean teaching a student"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRFa4GRA719oEvGg_8Fd1tivHpHGF_UR3szTg3fl9KaRzZVGwGSp0Nd2nzguT746hnYS3sCLo1-jMFqHGirWpjPfX9KsDDPW2BmZNlxotchSBKiKDkJxUbwJTYjDPdylC_SlRGjzDpy2YpRaSfkEsOcSIz1Xo4nbVAoF435XCms0ZVAwB2okwW6lQ6Zl1HwSXPTMary7mzKNDtOMbuw07MboYYCMZjde1jBOPD_NpMMJcFqyd6fQMfx7nD6darrKAKLp0byfPflBc" />
+                            <!-- Floater Card -->
+                            <div
+                                class="absolute bottom-6 left-6 bg-white/90 dark:bg-slate-800/90 backdrop-blur p-4 rounded-xl shadow-lg max-w-[200px]">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="material-symbols-outlined text-yellow-500">stars</span>
+                                    <span class="font-bold text-sm text-slate-900 dark:text-white">ISA Certified</span>
+                                </div>
+                                <p class="text-xs text-slate-600 dark:text-slate-300">All our instructors are
+                                    internationally certified for safety.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-1 lg:order-2 flex flex-col gap-6">
+                        <div class="flex items-center gap-2 text-primary font-bold tracking-wider uppercase text-sm">
+                            <span class="w-8 h-[2px] bg-primary"></span>
+                            About Us
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">
+                            Aloha from the <span class="text-primary">Team</span>
+                        </h2>
+                        <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
+                            Founded in 2010, we are a team of certified instructors dedicated to sharing the stoke of
+                            surfing. Whether you're a complete beginner or looking to refine your cutback, we ensure
+                            safety and fun in every session.
+                        </p>
+                        <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
+                            Our methodology focuses on reading the ocean, understanding wave mechanics, and building
+                            confidence in the water. We don't just teach you to stand up; we teach you to surf.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 mt-4">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-3xl font-bold text-primary">15+</span>
+                                <span class="text-sm text-slate-500 font-medium">Years Experience</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-3xl font-bold text-primary">5k+</span>
+                                <span class="text-sm text-slate-500 font-medium">Happy Students</span>
+                            </div>
+                        </div>
+                        <button
+                            class="mt-4 w-fit px-8 h-12 rounded-full bg-primary text-white font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30 flex items-center gap-2">
+                            <span>Free Consultation</span>
+                            <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Packages Section -->
+        <section class="py-24 px-4 md:px-10 bg-[#f4e4bc]/20 dark:bg-white/5 relative" id="packages">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-5 pointer-events-none"
+                style="background-image: radial-gradient(#006a94 1px, transparent 1px); background-size: 32px 32px;">
+            </div>
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">Choose Your Wave</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-lg">Select the package that fits your skill level.
+                        All equipment provided.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Beginner Card -->
+                    <div
+                        class="package-card group bg-white dark:bg-slate-800 rounded-3xl p-2 shadow-xl flex flex-col h-full border border-slate-100 dark:border-slate-700">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
+                            <div
+                                class="card-badge absolute top-3 right-3 bg-white/90 backdrop-blur text-primary text-xs font-bold px-3 py-1 rounded-full z-10 uppercase tracking-wide">
+                                Group</div>
+                            <img alt="Beginner surfing lesson group"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                data-alt="Group of beginners with surfboards on beach"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ1CfI1hlH6KIAJf4vX9DbyyAm4wCvr8HbKuvS4PACuLsf1it8QwXyUywX7ZMTW8UcDv1GHqI3jRO00PA3Y8um3NWWV10UMc09EpZDx-puUy8hsCmth6NuBdcUxYlHB402vjcpIup2nqX91Acd_HTfbjz6zmu4Oy0T1MZbXbGMMenIdCxYuj8nZDVNtw9CllZucHmAjYYN20-fX67DliiUXDV5_Xrtz3NscUOdR45CONuGZWGW3grcvoFa3q3eHxux_VEKnLjPAgE" />
+                        </div>
+                        <div class="px-6 pb-8 flex-1 flex flex-col">
+                            <h3 class="card-title text-xl font-bold text-slate-900 dark:text-white mb-2">Beginner Basics
+                            </h3>
+                            <p class="card-description text-slate-500 text-sm mb-6">Perfect for first-timers. Learn
+                                safety, paddling, and
+                                popping up.</p>
+                            <div class="flex items-baseline gap-1 mb-6">
+                                <span class="card-price text-3xl font-black text-primary">450K</span>
+                                <span class="card-price-unit text-sm font-bold text-slate-400">IDR / person</span>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-1">
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    2 Hour Lesson
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Board &amp; Rash Guard
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Insurance Included
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Small Group (Max 4)
+                                </li>
+                            </ul>
+                            <button
+                                class="card-btn w-full py-3 rounded-full border-2 border-primary text-primary font-bold transition-colors">Book
+                                Now</button>
+                        </div>
+                    </div>
+                    <!-- Intermediate Card -->
+                    <div
+                        class="package-card group bg-white dark:bg-slate-800 rounded-3xl p-2 shadow-xl flex flex-col h-full border-2 border-primary relative">
+                        <div
+                            class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg uppercase tracking-wider">
+                            Most Popular</div>
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4 mt-2">
+                            <div
+                                class="card-badge absolute top-3 right-3 bg-white/90 backdrop-blur text-primary text-xs font-bold px-3 py-1 rounded-full z-10 uppercase tracking-wide">
+                                Semi-Private</div>
+                            <img alt="Intermediate surfer riding a green wave"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                data-alt="Surfer riding a green wave"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyIcj7y8qXR3r8WFDoHVIH8PyGiyrdzr_pFUU_KCJg8ITUiDGdd76IrIheODDPJ8K3Hq0RogFzR3S046ptsHv53ZQZR5299UqZdDN0YTJddUNhiE-yjJBSrrtW_h2KIFfezFYPOKDcgrUu544WD1zOiU5pthJ3JrnLpsSIxQwXxMXU_YcZ7KqSiVN-Y8b4HlwlCPGkhd6DisC8IM0KRtUvDLa9lswwzoayzGTy5cNVX1XoVc2z43Xy8c0sLQGl6FYlo9zTd04Xsr8" />
+                        </div>
+                        <div class="px-6 pb-8 flex-1 flex flex-col">
+                            <h3 class="card-title text-xl font-bold text-slate-900 dark:text-white mb-2">Intermediate
+                                Skills</h3>
+                            <p class="card-description text-slate-500 text-sm mb-6">Refine your turns and learn to read
+                                green waves
+                                better.</p>
+                            <div class="flex items-baseline gap-1 mb-6">
+                                <span class="card-price text-3xl font-black text-primary">600K</span>
+                                <span class="card-price-unit text-sm font-bold text-slate-400">IDR / person</span>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-1">
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    2 Hour Lesson
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Video Analysis
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Reef Break Transport
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Advanced Theory
+                                </li>
+                            </ul>
+                            <button
+                                class="card-btn w-full py-3 rounded-full bg-primary text-white font-bold transition-colors shadow-lg shadow-primary/30">Book
+                                Now</button>
+                        </div>
+                    </div>
+                    <!-- Private Card -->
+                    <div
+                        class="package-card group bg-white dark:bg-slate-800 rounded-3xl p-2 shadow-xl flex flex-col h-full border border-slate-100 dark:border-slate-700">
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
+                            <div
+                                class="card-badge absolute top-3 right-3 bg-white/90 backdrop-blur text-primary text-xs font-bold px-3 py-1 rounded-full z-10 uppercase tracking-wide">
+                                Private</div>
+                            <img alt="Private surf coaching session"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                data-alt="One on one surf coaching"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA98nnmZ4Dzey3OEkGGHA_3OIKvFS7Xy0jXuy4assOT26WZVlzugO-LHadtlnZcppVnW2InwJhrH4F5ONVbpn3C2BrpM2tSKQvNGYqGECI1qgwRPkcR5SDJb3206oMnWwVhRqjxSLrNEmdDx4haECAv811p9sFmmDsDKrdhPLGTlDjawhvLu-R6Cgaf_ihM5cMy47mKE3u9_sDYkGt75PRgGFfeNxwo-ubdVeUCP254PajMrJAkU6VOiK5wHTXm8kPB3G7p-x6JTVQ" />
+                        </div>
+                        <div class="px-6 pb-8 flex-1 flex flex-col">
+                            <h3 class="card-title text-xl font-bold text-slate-900 dark:text-white mb-2">Private 1-on-1
+                            </h3>
+                            <p class="card-description text-slate-500 text-sm mb-6">Maximum attention for rapid
+                                progression. Fully
+                                customized.</p>
+                            <div class="flex items-baseline gap-1 mb-6">
+                                <span class="card-price text-3xl font-black text-primary">900K</span>
+                                <span class="card-price-unit text-sm font-bold text-slate-400">IDR / session</span>
+                            </div>
+                            <ul class="space-y-3 mb-8 flex-1">
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Flexible Schedule
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Personalized Coaching
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Photo Package Included
+                                </li>
+                                <li
+                                    class="card-feature flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+                                    <span
+                                        class="card-icon material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                    Hotel Transfer
+                                </li>
+                            </ul>
+                            <button
+                                class="card-btn w-full py-3 rounded-full border-2 border-primary text-primary font-bold transition-colors">Book
+                                Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section - What They Say -->
+        <section class="relative py-24 overflow-hidden" id="testimonials">
+            <!-- Ocean Background -->
+            <div class="absolute inset-0 z-0">
+                <img src="img/gallery1.webp" alt="Ocean Background" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-10">
+                <div class="text-center mb-16">
+                    <h2 class="marker-font text-white text-4xl md:text-5xl lg:text-6xl mb-4 drop-shadow-lg">WHAT THEY
+                        SAY</h2>
+                    <div class="w-20 h-1 bg-secondary mx-auto"></div>
+                </div>
+
+                <!-- Testimonials Auto-Scroll Container -->
+                <div class="overflow-hidden">
+                    <div class="testimonial-track gap-6">
+                        <!-- Testimonial 1 -->
+                        <div
+                            class="flex-shrink-0 w-[350px] md:w-[450px] bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg">
+                                    B</div>
+                                <div>
+                                    <h4 class="text-white font-bold">Bartek Oset</h4>
+                                    <p class="text-slate-400 text-sm">8 ulasan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <span class="text-yellow-400">★★★★★</span>
+                                <span class="text-slate-400 text-sm ml-2">10 bulan lalu</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">JHON Bali Surf School is the best place to
+                                start your surfing adventure 😊 The guys are amazing. Patient, professional and at the
+                                same time with a great sense of humour. If you want to have a good time in a good
+                                company and at the same time learn how to stand up on a board, this is the place for you
+                                😉</p>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div
+                            class="flex-shrink-0 w-[350px] md:w-[450px] bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-slate-900 font-bold text-lg">
+                                    A</div>
+                                <div>
+                                    <h4 class="text-white font-bold">Aurélie</h4>
+                                    <p class="text-slate-400 text-sm">Local Guide · 19 ulasan · 5 foto</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <span class="text-yellow-400">★★★★★</span>
+                                <span class="text-slate-400 text-sm ml-2">8 bulan lalu</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">Went to this surf school with a friend and
+                                had an amazing time! Jo is really professional, patient, encouraging, and kind. I was
+                                scared before trying, but could stand on the wave from the first try, thanks to his good
+                                explanations and help!</p>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div
+                            class="flex-shrink-0 w-[350px] md:w-[450px] bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                                    M</div>
+                                <div>
+                                    <h4 class="text-white font-bold">Michael Chen</h4>
+                                    <p class="text-slate-400 text-sm">5 ulasan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <span class="text-yellow-400">★★★★★</span>
+                                <span class="text-slate-400 text-sm ml-2">3 bulan lalu</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">Best surfing experience in Bali! The
+                                instructors are patient and really know how to teach beginners. I went from zero
+                                experience to catching my first wave in just one session. Highly recommended!</p>
+                        </div>
+
+                        <!-- Testimonial 4 -->
+                        <div
+                            class="flex-shrink-0 w-[350px] md:w-[450px] bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center text-white font-bold text-lg">
+                                    S</div>
+                                <div>
+                                    <h4 class="text-white font-bold">Sarah Johnson</h4>
+                                    <p class="text-slate-400 text-sm">12 ulasan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <span class="text-yellow-400">★★★★★</span>
+                                <span class="text-slate-400 text-sm ml-2">1 bulan lalu</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">Amazing experience! The team made me feel
+                                so comfortable in the water. Great photos included and the beach location is absolutely
+                                beautiful. Will definitely come back next time I'm in Bali!</p>
+                        </div>
+
+                        <!-- Duplicate for seamless loop -->
+                        <div
+                            class="flex-shrink-0 w-[350px] md:w-[450px] bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-lg">
+                                    B</div>
+                                <div>
+                                    <h4 class="text-white font-bold">Bartek Oset</h4>
+                                    <p class="text-slate-400 text-sm">8 ulasan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <span class="text-yellow-400">★★★★★</span>
+                                <span class="text-slate-400 text-sm ml-2">10 bulan lalu</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">JHON Bali Surf School is the best place to
+                                start your surfing adventure 😊 The guys are amazing. Patient, professional and at the
+                                same time with a great sense of humour.</p>
+                        </div>
+
+                        <div
+                            class="flex-shrink-0 w-[350px] md:w-[450px] bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-slate-900 font-bold text-lg">
+                                    A</div>
+                                <div>
+                                    <h4 class="text-white font-bold">Aurélie</h4>
+                                    <p class="text-slate-400 text-sm">Local Guide · 19 ulasan · 5 foto</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <span class="text-yellow-400">★★★★★</span>
+                                <span class="text-slate-400 text-sm ml-2">8 bulan lalu</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">Went to this surf school with a friend and
+                                had an amazing time! Jo is really professional, patient, encouraging, and kind.</p>
+                        </div>
+
+                        <div
+                            class="flex-shrink-0 w-[350px] md:w-[450px] bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg">
+                                    M</div>
+                                <div>
+                                    <h4 class="text-white font-bold">Michael Chen</h4>
+                                    <p class="text-slate-400 text-sm">5 ulasan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <span class="text-yellow-400">★★★★★</span>
+                                <span class="text-slate-400 text-sm ml-2">3 bulan lalu</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">Best surfing experience in Bali! The
+                                instructors are patient and really know how to teach beginners.</p>
+                        </div>
+
+                        <div
+                            class="flex-shrink-0 w-[350px] md:w-[450px] bg-slate-900/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center text-white font-bold text-lg">
+                                    S</div>
+                                <div>
+                                    <h4 class="text-white font-bold">Sarah Johnson</h4>
+                                    <p class="text-slate-400 text-sm">12 ulasan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1 mb-3">
+                                <span class="text-yellow-400">★★★★★</span>
+                                <span class="text-slate-400 text-sm ml-2">1 bulan lalu</span>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">Amazing experience! The team made me feel
+                                so comfortable in the water. Great photos included!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="py-24 px-4 md:px-10 bg-white dark:bg-background-dark" id="gallery">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                    <div>
+                        <div
+                            class="flex items-center gap-2 text-primary font-bold tracking-wider uppercase text-sm mb-2">
+                            <span class="w-8 h-[2px] bg-primary"></span>
+                            Gallery
+                        </div>
+                        <h2 class="text-4xl font-bold text-slate-900 dark:text-white">Life in the Water</h2>
+                    </div>
+                    <button
+                        class="hidden md:flex px-6 h-10 rounded-full border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors items-center gap-2">
+                        <span>Follow on Instagram</span>
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </button>
+                </div>
+                <!-- Masonry Grid -->
+                <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+                    <div class="break-inside-avoid rounded-2xl overflow-hidden group relative">
+                        <img alt="Surfer catching a big wave"
+                            class="w-full bg-slate-100 group-hover:scale-105 transition-transform duration-500"
+                            src="img/gallery1.webp" />
+                        <div
+                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid rounded-2xl overflow-hidden group relative">
+                        <img alt="Beautiful beach view"
+                            class="w-full bg-slate-100 group-hover:scale-105 transition-transform duration-500"
+                            src="img/gallery2.webp" />
+                        <div
+                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid rounded-2xl overflow-hidden group relative">
+                        <img alt="Crystal clear water"
+                            class="w-full bg-slate-100 group-hover:scale-105 transition-transform duration-500"
+                            src="img/gallery3.webp" />
+                        <div
+                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid rounded-2xl overflow-hidden group relative">
+                        <img alt="Surfing adventure"
+                            class="w-full bg-slate-100 group-hover:scale-105 transition-transform duration-500"
+                            src="img/gallery4.webp" />
+                        <div
+                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid rounded-2xl overflow-hidden group relative">
+                        <img alt="Ocean waves"
+                            class="w-full bg-slate-100 group-hover:scale-105 transition-transform duration-500"
+                            src="img/gallery5.webp" />
+                        <div
+                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid rounded-2xl overflow-hidden group relative">
+                        <img alt="Surf school fun"
+                            class="w-full bg-slate-100 group-hover:scale-105 transition-transform duration-500"
+                            src="img/gallery6.webp" />
+                        <div
+                            class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-center md:hidden">
+                    <button
+                        class="px-6 h-10 rounded-full border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center gap-2">
+                        <span>Follow on Instagram</span>
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="bg-[#0b161b] text-white pt-20 pb-10 px-4 md:px-10 rounded-t-[3rem] mt-10" id="contact">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-16 mb-16">
+                    <!-- Left Side -->
+                    <div class="flex flex-col gap-8">
+                        <div>
+                            <div class="flex items-center gap-3 text-white mb-6">
+                                <div
+                                    class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-secondary">
+                                    <span class="material-symbols-outlined text-2xl">surfing</span>
+                                </div>
+                                <h2 class="text-2xl font-bold tracking-tight">Bali Surf School</h2>
+                            </div>
+                            <p class="text-slate-400 max-w-md leading-relaxed">
+                                Join us in paradise for the ultimate surfing experience. We're committed to safe, fun,
+                                and professional instruction on the beautiful beaches of Bali.
+                            </p>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-8">
+                            <div class="flex flex-col gap-4">
+                                <h4 class="font-bold text-lg text-white">Contact</h4>
+                                <div class="flex flex-col gap-3 text-slate-400 text-sm">
+                                    <a class="flex items-center gap-2 hover:text-secondary transition-colors" href="#">
+                                        <span class="material-symbols-outlined text-lg">call</span>
+                                        +62 812 3456 7890
+                                    </a>
+                                    <a class="flex items-center gap-2 hover:text-secondary transition-colors" href="#">
+                                        <span class="material-symbols-outlined text-lg">mail</span>
+                                        hello@balisurfschool.com
+                                    </a>
+                                    <a class="flex items-center gap-2 hover:text-secondary transition-colors" href="#">
+                                        <span class="material-symbols-outlined text-lg">location_on</span>
+                                        Jalan Pantai Kuta No. 10, Bali
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-4">
+                                <h4 class="font-bold text-lg text-white">Links</h4>
+                                <div class="flex flex-col gap-3 text-slate-400 text-sm">
+                                    <a class="hover:text-secondary transition-colors" href="#">About Us</a>
+                                    <a class="hover:text-secondary transition-colors" href="#">Packages</a>
+                                    <a class="hover:text-secondary transition-colors" href="#">Instructors</a>
+                                    <a class="hover:text-secondary transition-colors" href="#">FAQ</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <a class="h-10 w-10 rounded-full bg-white/5 hover:bg-secondary hover:text-[#0b161b] flex items-center justify-center transition-all"
+                                href="#">
+                                <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <a class="h-10 w-10 rounded-full bg-white/5 hover:bg-secondary hover:text-[#0b161b] flex items-center justify-center transition-all"
+                                href="#">
+                                <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <a class="h-10 w-10 rounded-full bg-white/5 hover:bg-secondary hover:text-[#0b161b] flex items-center justify-center transition-all"
+                                href="#">
+                                <svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.315 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-.138-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Right Side - Form -->
+                    <div class="bg-white/5 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                        <h4 class="font-bold text-2xl text-white mb-2">Book Your Session</h4>
+                        <p class="text-slate-400 mb-6 text-sm">Send us a message and we'll get you on the perfect wave.
+                        </p>
+                        <form class="flex flex-col gap-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input
+                                    class="w-full h-12 rounded-xl bg-white/10 border-transparent focus:border-secondary focus:bg-white/20 focus:ring-0 text-white placeholder-slate-400 px-4 transition-all"
+                                    placeholder="Name" type="text" />
+                                <input
+                                    class="w-full h-12 rounded-xl bg-white/10 border-transparent focus:border-secondary focus:bg-white/20 focus:ring-0 text-white placeholder-slate-400 px-4 transition-all"
+                                    placeholder="Email" type="email" />
+                            </div>
+                            <select
+                                class="w-full h-12 rounded-xl bg-white/10 border-transparent focus:border-secondary focus:bg-white/20 focus:ring-0 text-slate-400 px-4 transition-all">
+                                <option>Select Package</option>
+                                <option>Beginner (Group)</option>
+                                <option>Intermediate (Skills)</option>
+                                <option>Private (1-on-1)</option>
+                            </select>
+                            <textarea
+                                class="w-full rounded-xl bg-white/10 border-transparent focus:border-secondary focus:bg-white/20 focus:ring-0 text-white placeholder-slate-400 px-4 py-3 transition-all resize-none"
+                                placeholder="Message" rows="3"></textarea>
+                            <button
+                                class="mt-2 w-full h-12 rounded-xl bg-secondary text-[#0b161b] font-bold hover:bg-white transition-colors"
+                                type="button">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div
+                    class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                    <p>© 2024 Bali Surf School. All rights reserved.</p>
+                    <div class="flex gap-6">
+                        <a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+                        <a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- WhatsApp Floating Button -->
+        <div class="wa-button">
+            <span class="tooltip">Chat Here</span>
+            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">
+                <svg class="w-8 h-8 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- JavaScript for functionality -->
+    <script>
+        // Mobile Menu Functions
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').classList.add('active');
+            document.getElementById('mobileOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('active');
+            document.getElementById('mobileOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Sticky Navbar on Scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('navbar-sticky');
+            } else {
+                navbar.classList.remove('navbar-sticky');
+            }
+        });
+
+        // Smooth Scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+    </script>
+</body>
+
+</html>
